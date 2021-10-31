@@ -6,7 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using System.Drawing;
+using Tesseract;
+using System.IO;
+using System.Text;
 namespace OcrRndProject.Controllers
 {
     [Route("api/[controller]")]
@@ -14,6 +17,8 @@ namespace OcrRndProject.Controllers
     public class OcrController : ControllerBase 
     {
         private readonly IOcrImplementService _service;
+      
+
         public OcrController(IOcrImplementService service)
         {
             _service = service;
@@ -59,13 +64,38 @@ namespace OcrRndProject.Controllers
             return "Test string";
         }
 
+      
 
         [HttpGet]
         [Route("[action]")]
 
         public string OcrRead()
         {
-            return "Test string";
+          
+            var img = Pix.LoadFromFile(@"C:\Users\TID-ITDev-56\Desktop\DotNetCore\CoreOcrProject\OcrRndProject\Images\Test1.jpg");
+            var path = @"C:\Users\TID-ITDev-56\Desktop\DotNetCore\CoreOcrProject\OcrRndProject\tessdata";
+
+            //Bitmap img = new Bitmap(@"Test1.jpg");
+            using (TesseractEngine engine = new TesseractEngine(path, "bengali", EngineMode.Default))
+            {
+                Page page = engine.Process(img, PageSegMode.Auto);
+                string result = page.GetText();
+
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(@"C:\Users\TID-ITDev-56\Desktop\DotNetCore", "WriteLines.doc")))
+                {
+
+                   return result;
+                }
+
+                //Console.WriteLine(result);
+            }
         }
+
+
+
+
     }
+    
 }
+
+

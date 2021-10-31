@@ -20,7 +20,11 @@ namespace OcrRndProject.DAL
         public DbSet<NidInformations> NidInformations { get; set; }
         public DbSet<NidAddressInfo> NidAddressInfo { get; set; }
 
+       /* protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //Configure domain classes using modelBuilder here..
 
+        }*/
 
 
     }
