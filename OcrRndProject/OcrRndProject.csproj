@@ -23,11 +23,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspose.OCR" Version="21.10.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.11">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
     <PackageReference Include="Tesseract" Version="4.1.1" />
     <PackageReference Include="Tesseract-OCR" Version="1.0.4" />
   </ItemGroup>
@@ -37,6 +40,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Images\NID4.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\Test1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

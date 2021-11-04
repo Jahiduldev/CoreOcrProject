@@ -15,6 +15,10 @@ namespace OcrRndProject.BLL.Infrastructure
         {
             CreateMap<NidDomainModel, NidInformations>();
             CreateMap<NidInformations, NidDomainModel>();
+
+            CreateMap<Book, BookDTO>().ForMember(m => m.Id, opt => opt.Ignore());
+
+            CreateMap<Author, AuthorDTO>().ForMember(m => m.Id, opt => opt.Ignore());
         }
        
     }

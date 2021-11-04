@@ -19,6 +19,44 @@ namespace OcrRndProject.DAL.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("OcrRndProject.DAL.Model.Entity.Author", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Author");
+                });
+
+            modelBuilder.Entity("OcrRndProject.DAL.Model.Entity.Book", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("Book");
+                });
+
             modelBuilder.Entity("OcrRndProject.DAL.Model.Entity.NidAddressInfo", b =>
                 {
                     b.Property<int>("Id")
@@ -117,11 +155,27 @@ namespace OcrRndProject.DAL.Migrations
                     b.ToTable("NidInformations");
                 });
 
+            modelBuilder.Entity("OcrRndProject.DAL.Model.Entity.Book", b =>
+                {
+                    b.HasOne("OcrRndProject.DAL.Model.Entity.Author", "Author")
+                        .WithMany("Books")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+                });
+
             modelBuilder.Entity("OcrRndProject.DAL.Model.Entity.NidInformations", b =>
                 {
                     b.HasOne("OcrRndProject.DAL.Model.Entity.NidAddressInfo", null)
                         .WithMany("NidInformations")
                         .HasForeignKey("NidAddressInfoId");
+                });
+
+            modelBuilder.Entity("OcrRndProject.DAL.Model.Entity.Author", b =>
+                {
+                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("OcrRndProject.DAL.Model.Entity.NidAddressInfo", b =>
